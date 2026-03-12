@@ -396,30 +396,19 @@
 
   a, .wf-link { cursor: pointer; }
 
-  /* floaty cursor */
-  .cursor-moon {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    font-size: 20px;
-    transform: translate(-50%, -50%);
-    transition: left 0.08s ease-out, top 0.08s ease-out;
-    filter: drop-shadow(0 0 6px rgba(232, 220, 200, 0.4));
-  }
-
+  /* cursor sparkle trail */
   .cursor-sparkle {
     position: fixed;
     pointer-events: none;
     z-index: 9998;
-    font-size: 14px;
+    font-size: 12px;
     opacity: 1;
-    animation: cursorFloat 1s ease-out forwards;
+    animation: cursorFloat 0.8s ease-out forwards;
   }
 
   @keyframes cursorFloat {
-    0% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
-    50% { opacity: 0.6; }
-    100% { opacity: 0; transform: translate(-50%, calc(-50% - 40px)) scale(0.3) rotate(120deg); }
+    0% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, calc(-50% - 30px)) scale(0.2); }
   }
 
   .footer {
@@ -454,7 +443,7 @@
       transition-duration: 0.01ms !important;
     }
     .tl-entry { opacity: 1; transform: none; }
-    .cursor-moon, .cursor-sparkle { display: none; }
+    .cursor-sparkle { display: none; }
   }
 
   @media (max-width: 640px) {
@@ -714,47 +703,31 @@
   }, { threshold: 0.05 });
   document.querySelectorAll('.tl-entry').forEach(el => observer.observe(el));
 
-  // floaty moon cursor + sparkle trail
-  const moon = document.createElement('div');
-  moon.className = 'cursor-moon';
-  moon.setAttribute('aria-hidden', 'true');
-  moon.textContent = '\u{1F319}';
-  document.body.appendChild(moon);
-
-  const sparkles = ['\u2728','\u2B50','\u2727','\u2726','\u00B7','\u2606'];
-  let lastSparkle = 0;
-  let lastX = 0, lastY = 0;
+  // simple sparkle trail on cursor
+  const sparkles = ['✦','✧','·'];
+  let lastSparkle = 0, lastX = 0, lastY = 0;
 
   document.addEventListener('mousemove', (e) => {
-    moon.style.left = e.clientX + 'px';
-    moon.style.top = e.clientY + 'px';
-
     const dx = e.clientX - lastX;
     const dy = e.clientY - lastY;
     const dist = Math.sqrt(dx*dx + dy*dy);
     const now = Date.now();
 
-    if (dist > 20 && now - lastSparkle > 80) {
+    if (dist > 30 && now - lastSparkle > 120) {
       const s = document.createElement('div');
       s.className = 'cursor-sparkle';
       s.setAttribute('aria-hidden', 'true');
       s.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
-      s.style.left = (e.clientX + (Math.random()-0.5)*16) + 'px';
-      s.style.top = (e.clientY + (Math.random()-0.5)*16) + 'px';
-      s.style.fontSize = (8 + Math.random()*10) + 'px';
-      s.style.color = Math.random() > 0.5
-        ? 'rgba(232, 220, 200, 0.7)'
-        : 'rgba(184, 160, 212, 0.6)';
+      s.style.left = e.clientX + 'px';
+      s.style.top = e.clientY + 'px';
+      s.style.color = 'rgba(184, 160, 212, 0.5)';
       document.body.appendChild(s);
-      setTimeout(() => s.remove(), 1000);
+      setTimeout(() => s.remove(), 800);
       lastSparkle = now;
       lastX = e.clientX;
       lastY = e.clientY;
     }
   });
-
-  document.addEventListener('mouseleave', () => { moon.style.opacity = '0'; });
-  document.addEventListener('mouseenter', () => { moon.style.opacity = '1'; });
 </script>
 
 </body>
