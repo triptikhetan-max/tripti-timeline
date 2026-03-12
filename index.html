@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>18 months of social studies</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Special+Elite&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Special Elite', 'Courier New', monospace;
+    background: #0c0e1a;
+    color: #ddd8d0;
+    line-height: 1.85;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before, body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::before {
+    background:
+      /* bright stars */
+      radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1.5px 1.5px at 25% 45%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(2.5px 2.5px at 40% 12%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1px 1px at 55% 60%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(2px 2px at 70% 30%, rgba(255,255,255,0.65), transparent),
+      radial-gradient(2.5px 2.5px at 80% 70%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 90% 10%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(2px 2px at 15% 80%, rgba(255,255,255,0.55), transparent),
+      radial-gradient(1px 1px at 35% 90%, rgba(255,255,255,0.35), transparent),
+      radial-gradient(2.5px 2.5px at 60% 5%, rgba(255,255,255,0.75), transparent),
+      radial-gradient(1.5px 1.5px at 85% 50%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(2px 2px at 5% 55%, rgba(255,255,255,0.6), transparent),
+      /* dimmer star field */
+      radial-gradient(1px 1px at 48% 35%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(1px 1px at 22% 65%, rgba(255,255,255,0.35), transparent),
+      radial-gradient(1px 1px at 75% 85%, rgba(255,255,255,0.25), transparent),
+      radial-gradient(1px 1px at 92% 42%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(1px 1px at 3% 38%, rgba(255,255,255,0.2), transparent),
+      radial-gradient(1px 1px at 67% 18%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(1px 1px at 33% 72%, rgba(255,255,255,0.25), transparent),
+      radial-gradient(1px 1px at 88% 88%, rgba(255,255,255,0.2), transparent),
+      radial-gradient(1px 1px at 52% 48%, rgba(255,255,255,0.15), transparent),
+      radial-gradient(1px 1px at 18% 12%, rgba(255,255,255,0.3), transparent),
+      /* colored stars */
+      radial-gradient(1.5px 1.5px at 43% 25%, rgba(180, 160, 220, 0.5), transparent),
+      radial-gradient(1.5px 1.5px at 78% 55%, rgba(160, 190, 255, 0.4), transparent),
+      radial-gradient(1.5px 1.5px at 12% 48%, rgba(200, 170, 230, 0.35), transparent);
+  }
+
+  body::after {
+    background: radial-gradient(ellipse at 15% 75%, rgba(100, 40, 180, 0.15) 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 20%, rgba(30, 60, 160, 0.14) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 5%, rgba(120, 50, 200, 0.08) 0%, transparent 40%),
+                radial-gradient(ellipse at 70% 60%, rgba(60, 30, 120, 0.1) 0%, transparent 45%),
+                radial-gradient(ellipse at 30% 40%, rgba(80, 50, 160, 0.06) 0%, transparent 35%),
+                radial-gradient(ellipse at 60% 90%, rgba(40, 70, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 10% 20%, rgba(90, 30, 140, 0.07) 0%, transparent 35%);
+  }
+
+  /* crescent moon */
+  .moon {
+    position: fixed;
+    top: 6%;
+    right: 8%;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 12px -8px 0 0 #e8dcc8;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+    animation: moonGlow 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes moonGlow {
+    0% { opacity: 0.2; box-shadow: 12px -8px 0 0 #e8dcc8; }
+    100% { opacity: 0.35; box-shadow: 12px -8px 6px 2px #e8dcc8; }
+  }
+
+  /* twinkling stars scattered */
+  .star {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.3);
+    animation: twinkle 3s ease-in-out infinite alternate;
+  }
+
+  .star.s1 { top: 12%; left: 5%; font-size: 10px; animation-delay: 0s; color: rgba(232, 220, 200, 0.35); }
+  .star.s2 { top: 4%; left: 30%; font-size: 16px; animation-delay: 1.2s; color: rgba(184, 160, 212, 0.3); }
+  .star.s3 { top: 18%; right: 20%; font-size: 8px; animation-delay: 0.5s; }
+  .star.s4 { top: 30%; left: 3%; font-size: 12px; animation-delay: 2s; color: rgba(232, 220, 200, 0.25); }
+  .star.s5 { top: 8%; left: 52%; font-size: 6px; animation-delay: 0.8s; }
+  .star.s6 { top: 45%; right: 4%; font-size: 14px; animation-delay: 1.5s; color: rgba(184, 160, 212, 0.25); }
+  .star.s7 { top: 60%; left: 6%; font-size: 10px; animation-delay: 2.5s; color: rgba(232, 220, 200, 0.3); }
+  .star.s8 { top: 75%; right: 7%; font-size: 8px; animation-delay: 0.3s; }
+  .star.s9 { top: 22%; left: 15%; font-size: 18px; animation-delay: 1.8s; color: rgba(184, 160, 212, 0.2); }
+  .star.s10 { top: 88%; left: 12%; font-size: 12px; animation-delay: 3s; color: rgba(232, 220, 200, 0.25); }
+  .star.s11 { top: 55%; left: 2%; font-size: 6px; animation-delay: 0.7s; }
+  .star.s12 { top: 35%; right: 6%; font-size: 10px; animation-delay: 2.2s; color: rgba(232, 220, 200, 0.3); }
+  .star.s13 { top: 92%; right: 15%; font-size: 14px; animation-delay: 1s; color: rgba(184, 160, 212, 0.2); }
+  .star.s14 { top: 68%; right: 3%; font-size: 8px; animation-delay: 2.8s; }
+
+  @keyframes twinkle {
+    0% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0.3; transform: scale(0.9); }
+  }
+
+  /* small sparkle dots - the pinterest touch */
+  .sparkle {
+    position: fixed;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(232, 220, 200, 0.5);
+    pointer-events: none;
+    z-index: 0;
+    animation: sparkle 4s ease-in-out infinite;
+  }
+
+  .sparkle:nth-child(1) { top: 15%; left: 88%; animation-delay: 0s; }
+  .sparkle:nth-child(2) { top: 40%; left: 92%; animation-delay: 1s; width: 2px; height: 2px; }
+  .sparkle:nth-child(3) { top: 52%; left: 8%; animation-delay: 2s; background: rgba(184, 160, 212, 0.4); }
+  .sparkle:nth-child(4) { top: 70%; left: 95%; animation-delay: 1.5s; width: 2px; height: 2px; }
+  .sparkle:nth-child(5) { top: 85%; left: 4%; animation-delay: 2.5s; background: rgba(184, 160, 212, 0.3); }
+
+  @keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4rem 2rem 4rem;
+  }
+
+  .hand { font-family: 'Caveat', cursive; }
+
+  .header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .header h1 {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(2rem, 6vw, 2.8rem);
+    font-weight: 700;
+    color: #e8e4dc;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .header h1 span {
+    color: #b8a0d4;
+    text-shadow: 0 0 20px rgba(184, 160, 212, 0.3);
+  }
+
+  .header-stars {
+    font-size: 0.6em;
+    color: rgba(232, 220, 200, 0.5) !important;
+    text-shadow: none !important;
+    letter-spacing: 2px;
+  }
+
+  .header .sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* timeline */
+  .tl-entry {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.5s ease;
+  }
+
+  .tl-entry.visible { opacity: 1; transform: translateY(0); }
+
+  .tl-entry:last-of-type { border-bottom: none; }
+
+  /* vertical connector line */
+  .tl-entry .tl-date {
+    position: relative;
+  }
+
+  .tl-entry .tl-date::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 1.5rem;
+    bottom: -1.25rem;
+    width: 1px;
+    background: linear-gradient(to bottom, rgba(184, 160, 212, 0.2), rgba(184, 160, 212, 0.05));
+  }
+
+  .tl-entry:last-of-type .tl-date::after { display: none; }
+
+  .tl-date {
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: #b8a0d4;
+    font-weight: 600;
+    padding-top: 0.15rem;
+    line-height: 1.3;
+  }
+
+  .tl-body {
+    font-size: 0.9rem;
+    line-height: 1.85;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .tl-body strong {
+    color: #e8e4dc;
+    font-weight: 400;
+  }
+
+  .tl-body .tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #b8a0d4;
+    background: rgba(184, 160, 212, 0.08);
+    padding: 0.15rem 0.45rem;
+    border-radius: 10px;
+    margin: 0.15rem 0.15rem 0.15rem 0;
+    vertical-align: middle;
+  }
+
+  .tl-body .work-list {
+    margin: 0.5rem 0 0.25rem;
+    padding-left: 1rem;
+    list-style: none;
+  }
+
+  .tl-body .work-list li {
+    position: relative;
+    padding-left: 0.75rem;
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .tl-body .work-list li::before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+    color: rgba(184, 160, 212, 0.4);
+  }
+
+  .tl-body .note {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    font-style: italic;
+    margin-top: 0.4rem;
+  }
+
+  /* highlight card */
+  .highlight {
+    background: rgba(184, 160, 212, 0.06);
+    border: 1px solid rgba(184, 160, 212, 0.12);
+    border-left: 2px solid rgba(184, 160, 212, 0.3);
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
+    margin: 0.6rem 0;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* section divider */
+  .phase {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #b8a0d4;
+    border: 1px solid rgba(184, 160, 212, 0.15);
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    border-radius: 12px;
+    margin: 2rem 0 1rem;
+    box-shadow: 0 0 12px rgba(184, 160, 212, 0.08);
+  }
+
+  /* people */
+  .people-section {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .people-section h2, .work-section h2 {
+    font-family: 'Caveat', cursive;
+    font-size: 1.15rem;
+    color: #e8e4dc;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .people {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0.5rem 0;
+  }
+
+  .people span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    padding: 0.25rem 0.6rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* workflowy section */
+  .work-section {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* h2 styles already defined in people-section */
+
+  .work-tree {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin: 0.75rem 0 1rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    line-height: 1.9;
+    color: rgba(255,255,255,0.55);
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  .work-tree .root {
+    color: #e8e4dc;
+    font-size: 0.7rem;
+  }
+
+  .work-tree .branch {
+    color: #b8a0d4;
+  }
+
+  .wf-link {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #b8a0d4;
+    border: 1px solid rgba(184, 160, 212, 0.25);
+    padding: 0.4rem 0.85rem;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+  }
+
+  .wf-link:hover {
+    background: rgba(184, 160, 212, 0.1);
+    border-color: rgba(184, 160, 212, 0.4);
+  }
+
+  a, .wf-link { cursor: pointer; }
+
+  /* floaty cursor */
+  .cursor-moon {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    font-size: 20px;
+    transform: translate(-50%, -50%);
+    transition: left 0.08s ease-out, top 0.08s ease-out;
+    filter: drop-shadow(0 0 6px rgba(232, 220, 200, 0.4));
+  }
+
+  .cursor-sparkle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    font-size: 14px;
+    opacity: 1;
+    animation: cursorFloat 1s ease-out forwards;
+  }
+
+  @keyframes cursorFloat {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+    50% { opacity: 0.6; }
+    100% { opacity: 0; transform: translate(-50%, calc(-50% - 40px)) scale(0.3) rotate(120deg); }
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.2);
+    font-size: 0.75rem;
+  }
+
+  .footer .sign {
+    font-family: 'Caveat', cursive;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #e8e4dc;
+    margin-top: 0.75rem;
+  }
+
+  /* focus styles for keyboard navigation */
+  .wf-link:focus-visible {
+    outline: 2px solid #b8a0d4;
+    outline-offset: 3px;
+    background: rgba(184, 160, 212, 0.1);
+  }
+
+  /* reduced motion: disable all animations */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .tl-entry { opacity: 1; transform: none; }
+    .cursor-moon, .cursor-sparkle { display: none; }
+  }
+
+  @media (max-width: 640px) {
+    .page { padding: 2.5rem 1.25rem 3rem; }
+    .tl-entry { grid-template-columns: 72px 1fr; gap: 0.85rem; }
+    .work-tree { font-size: 0.7rem; padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- decorative moon & stars -->
+<div class="moon" aria-hidden="true"></div>
+<div class="star s1" aria-hidden="true">&#10022;</div>
+<div class="star s2" aria-hidden="true">&#10023;</div>
+<div class="star s3" aria-hidden="true">&#9733;</div>
+<div class="star s4" aria-hidden="true">&#10022;</div>
+<div class="star s5" aria-hidden="true">&#183;</div>
+<div class="star s6" aria-hidden="true">&#10023;</div>
+<div class="star s7" aria-hidden="true">&#10022;</div>
+<div class="star s8" aria-hidden="true">&#9733;</div>
+<div class="star s9" aria-hidden="true">&#10023;</div>
+<div class="star s10" aria-hidden="true">&#10022;</div>
+<div class="star s11" aria-hidden="true">&#183;</div>
+<div class="star s12" aria-hidden="true">&#10022;</div>
+<div class="star s13" aria-hidden="true">&#10023;</div>
+<div class="star s14" aria-hidden="true">&#9733;</div>
+<div class="sparkle" aria-hidden="true"></div>
+<div class="sparkle" aria-hidden="true"></div>
+<div class="sparkle" aria-hidden="true"></div>
+<div class="sparkle" aria-hidden="true"></div>
+<div class="sparkle" aria-hidden="true"></div>
+
+<div class="page">
+
+  <div class="header">
+    <h1><span>18 months</span> of social studies <span class="header-stars" aria-hidden="true">&#10023; &#9789;</span></h1>
+    <div class="sub">tripti khetan &bull; jun 2024 &mdash; mar 2026 &bull; alpha school</div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase">joined &bull; ap work &bull; campus dri</div>
+
+  <div class="tl-entry">
+    <div class="tl-date">Jun '24</div>
+    <div class="tl-body">
+      Joined Alpha as Research Analyst / Learning Analyst at <span class="tag">$30/hr</span>
+    </div>
+  </div>
+
+  <div class="tl-entry">
+    <div class="tl-date">Jul &ndash; Aug</div>
+    <div class="tl-body">
+      Put on Social Studies with Andre. Started building AP Psych. Andre left, Sarah came in. Supported Sarah with lesson planning, backup plans, student analysis, and day-to-day Social Studies tasks.
+      <br><br>
+      Also <strong>Campus DRI for BTX</strong> &mdash; coaching ~30 kids. Running weekly coaching calls as a special request from Sam (guide), because students couldn't adapt to a different coach each time.
+    </div>
+  </div>
+
+  <div class="tl-entry">
+    <div class="tl-date">Jan &ndash; Feb '25</div>
+    <div class="tl-body">
+      Henno took lead on Social Studies. Worked directly with him on all AP and high school Social Studies work:
+      <ul class="work-list">
+        <li><strong>AP BrainLift</strong> + <strong>AP High School BrainLift</strong></li>
+        <li><strong>AP Environmental Science</strong> &mdash; entire course end to end (currently being used)</li>
+        <li>AP Psychology, AP Micro, AP Macro</li>
+        <li>FRQ auto-grader for AP Environmental Science</li>
+        <li>Note-taking activity</li>
+        <li>Writing practice</li>
+        <li>Backup plans for all Social Studies courses</li>
+        <li>Various specs</li>
+      </ul>
+      Supported all other Social Studies courses across the board while also maintaining campus DRI responsibilities.
+      <br><br>
+      Henno wanted me as Social Studies DRI &mdash; started conversations with Ben about promotion. Realized I hadn't completed a year. Ben asked me to go through the formal <span class="tag">Crossover process</span> for the SS DRI role.
+      <div class="highlight">Completed all assessments, interviews, and exams. Final interview with Kathryn &mdash; she approved me for the role. Still no promotion (hadn't completed a year).</div>
+    </div>
+  </div>
+
+  <div class="tl-entry">
+    <div class="tl-date">Apr &ndash; May</div>
+    <div class="tl-body">
+      Wrapped up all AP work. Last task: delivered the <strong>entire AP Psych course on AL</strong> end to end &mdash; still being used this year, and the course Abby really liked.
+      <br><br>
+      Transitioned back to K-8 team under Kathryn (my original team). May through June focused on campus responsibilities.
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase">k-8 social studies &bull; building from zero</div>
+
+  <div class="tl-entry">
+    <div class="tl-date">Mid-Jun</div>
+    <div class="tl-body">
+      Kathryn asked me to QC David P's tests. David went absconding within weeks. Kathryn had a conversation with me &mdash; since I'd already put my hat in the race for Social Studies, would I be interested?
+      <div class="highlight">No guarantee of a promotion, but visibility with Andy and a chance to show my work. I took it willingly, knowing there were no promises &mdash; willing to go the extra mile.</div>
+      Acquired Edmentum. Built the adapter spec. Created grade 6, 7, 8 courses + BRI-civics. Presented everything David P was working on within a week &mdash; presented it to Andy before vacation first week of September.
+    </div>
+  </div>
+
+  <div class="tl-entry">
+    <div class="tl-date">Mid-Sep</div>
+    <div class="tl-body">
+      Came back from vacation. Kathryn had shifted to Reading. <strong>Gui took over Social Studies.</strong>
+      <br><br>
+      Had a conversation with Gui. Realized: <span class="tag">zero K-8 SS work existed</span> &mdash; no research, no decisions, no standards, nothing from the previous DRI.
+      <br><br>
+      Gui gave initial direction: standard mapping, cross-mapping, understanding top standards, researching and building our own internal curriculum.
+      <br><br>
+      Meanwhile: <strong>3 campuses</strong> (Brownsville, Noah Bass Shop, Santa Barbara), 40-50 students, 4 hours coaching daily. Campus DRI was priority one. Social Studies research on the side. Also handling public campus mandate &mdash; legacy dashboard, placement, 4-5 daily tickets.
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase">the breaking point &bull; going full-time ss</div>
+
+  <div class="tl-entry">
+    <div class="tl-date">Oct</div>
+    <div class="tl-body">
+      Oct 7: Emailed Gui + Ben. No HOA, no manager, 49 students across campuses, fourth campus about to start. Campus DRI + coaching was already 40+ hrs/week. OT every week to keep Social Studies afloat. Couldn't do justice to either role.
+      <br><br>
+      Oct 12: Ben arranged Claudio + Soham to take over campus responsibility.
+    </div>
+  </div>
+
+  <div class="tl-entry">
+    <div class="tl-date">Nov</div>
+    <div class="tl-body">
+      Campus handover completed first/second week of November. <strong>Social Studies full-time.</strong>
+      <ul class="work-list">
+        <li>BrainLift</li>
+        <li>Testing decisions</li>
+        <li>Curriculum research</li>
+        <li>Standard analysis</li>
+      </ul>
+      Started having regular email conversations with Andy &mdash; feedback on BrainLift, feedback on decisions, direction on where to go.
+    </div>
+  </div>
+
+  <div class="tl-entry">
+    <div class="tl-date">Dec</div>
+    <div class="tl-body">
+      Abby found out I was on SS K-8. Requested Ben to move me to <strong>High School Social Studies</strong> &mdash; she really liked the AP Psych course and said the kids loved it. Ben brought it to Andy. Message back: <em>Andy doesn't think I'm ready.</em> Ben told me I'm not responsible for SS &mdash; just interim, filling in while hiring goes on.
+      <br><br>
+      Surgery &mdash; 2 weeks off. Came back. Emailed Gui about stepping back due to ambiguity.
+      <div class="highlight">Gui: you're still on K-8. Come up with Session 3 plans. His advice: share decisions, not questions. Changed my entire approach after that.</div>
+      Brainpop acquired. Started having back-and-forth with Andy about testing and direction.
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase">building systems &bull; automation &bull; reviews</div>
+
+  <div class="tl-entry">
+    <div class="tl-date">Jan '26</div>
+    <div class="tl-body">
+      Realized Social Studies had no fixed testing framework and test creation was extremely manual on Eduelastic.
+      <ul class="work-list">
+        <li>Built automated QC + test generation system</li>
+        <li>Sent framework to Andy</li>
+        <li>Dan/SuperBuilders reached out &mdash; showed debate app. Gave him <strong>Civics Time Machine</strong> idea, he started building on it</li>
+        <li>Crissy joined as HOA</li>
+        <li>Flying Colors review + full rebuild spec (Andy decided not to move forward based on XP calculation)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tl-entry">
+    <div class="tl-date">Feb</div>
+    <div class="tl-body">
+      Started working closely with Crissy. Finally had clear direction on Social Studies.
+      <br><br>
+      Crissy shared my <strong>decision document</strong> with Andy &mdash; laid out all decisions on testing, standards, long-term/short-term plan. No response.
+      <br><br>
+      Picked up extra work:
+      <ul class="work-list">
+        <li>Automated image generation for science &mdash; <strong>400+ images</strong> using Claude Code + Nanobanana</li>
+        <li>Eric: AP practice test support, student plans, remediations</li>
+      </ul>
+      Pre-vacation (planned trip Feb 28 &ndash; Mar 5):
+      <ul class="work-list">
+        <li>Created BrainLift for Eric</li>
+        <li>Deep analysis of critical SS students</li>
+        <li>Individual student notes for in-person meetings</li>
+        <li>Remediation course spec for Ilma</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase">present &bull; harvard</div>
+
+  <div class="tl-entry">
+    <div class="tl-date">Mar &mdash; now</div>
+    <div class="tl-body">
+      Came back from vacation. Got acceptance from NYU during the trip.
+      <br><br>
+      Eric asked me to take over <strong>High School Social Studies for a month</strong> while the new hire joins. Told Eric: I'm at $30/hr, already have K-8 on my plate, and BTX guides are reaching out directly for coaching interventions. Need approval from Ben or Andy.
+      <br><br>
+      Had a conversation with Ben. Ben: it's best I reach out to Andy directly.
+      <div class="highlight">While figuring out how to reach out to Andy &mdash; <strong>heard back from Harvard.</strong></div>
+    </div>
+  </div>
+
+  <!-- PEOPLE -->
+  <div class="people-section">
+    <h2>every HOA i've worked under for social studies:</h2>
+    <div class="people">
+      <span>Andre</span><span>Sarah</span><span>Henno</span><span>Sadie</span><span>Kathryn</span><span>Gui</span><span>Crissy</span><span>Eric</span><span>Ilma</span><span>Abby</span>
+    </div>
+  </div>
+
+  <!-- WORKFLOWY -->
+  <div class="work-section">
+    <h2>the work, if you want to see it</h2>
+    <p style="font-size: 0.85rem; color: rgba(255,255,255,0.55); margin-bottom: 0.5rem;">everything i've documented across social studies, AP, brainlifts, and more &mdash; all in one place.</p>
+    <div class="work-tree"><span class="root">Tripti's Workflowy</span>
+<span class="branch">&#9500;&#9472;&#9472;</span> Brainlifts
+<span class="branch">&#9474;</span>   <span class="branch">&#9500;&#9472;&#9472;</span> S3 AP Review BrainLift (Feb 2026)
+<span class="branch">&#9474;</span>   <span class="branch">&#9500;&#9472;&#9472;</span> Social Studies K-8 (WIP)
+<span class="branch">&#9474;</span>   <span class="branch">&#9500;&#9472;&#9472;</span> U.S. Citizenship Civics Course/App (WIP)
+<span class="branch">&#9474;</span>   <span class="branch">&#9500;&#9472;&#9472;</span> Rethinking Course Design for High School
+<span class="branch">&#9474;</span>   <span class="branch">&#9500;&#9472;&#9472;</span> AP BrainLift
+<span class="branch">&#9474;</span>   <span class="branch">&#9500;&#9472;&#9472;</span> Brownsville LL and Linc (Coaching Insights)
+<span class="branch">&#9474;</span>   <span class="branch">&#9500;&#9472;&#9472;</span> Brownsville Preschool-Linc Campus
+<span class="branch">&#9474;</span>   <span class="branch">&#9492;&#9472;&#9472;</span> Personalized Learning
+<span class="branch">&#9500;&#9472;&#9472;</span> Social Studies K-8
+<span class="branch">&#9474;</span>   <span class="branch">&#9500;&#9472;&#9472;</span> Everything Assessments and Tests
+<span class="branch">&#9474;</span>   <span class="branch">&#9500;&#9472;&#9472;</span> Long Term: Our Social Studies Courses Plan
+<span class="branch">&#9474;</span>   <span class="branch">&#9500;&#9472;&#9472;</span> Short Term
+<span class="branch">&#9474;</span>   <span class="branch">&#9500;&#9472;&#9472;</span> What Standards to Use
+<span class="branch">&#9474;</span>   <span class="branch">&#9492;&#9472;&#9472;</span> App Review and Framework
+<span class="branch">&#9500;&#9472;&#9472;</span> Tripti's Second Brain on AP
+<span class="branch">&#9474;</span>   <span class="branch">&#9500;&#9472;&#9472;</span> Spiky POV
+<span class="branch">&#9474;</span>   <span class="branch">&#9492;&#9472;&#9472;</span> Knowledge Tree
+<span class="branch">&#9492;&#9472;&#9472;</span> Archives
+    <span class="branch">&#9500;&#9472;&#9472;</span> DRI &mdash; Brownsville Preschool-Linc
+    <span class="branch">&#9500;&#9472;&#9472;</span> Math Academy Spiky POV
+    <span class="branch">&#9492;&#9472;&#9472;</span> Claude Artifacts</div>
+    <a href="https://workflowy.com/#/abf149ef88e3" target="_blank" rel="noopener noreferrer" class="wf-link">open in workflowy &rarr;</a>
+  </div>
+
+  <div class="footer">
+    <div aria-hidden="true" style="color: rgba(184, 160, 212, 0.25); font-size: 0.7rem; letter-spacing: 6px; margin-bottom: 0.5rem;">&#10023; &#9733; &#10022;</div>
+    <div class="sign">Tripti</div>
+    <div aria-hidden="true" style="color: rgba(232, 220, 200, 0.15); font-size: 0.6rem; letter-spacing: 4px; margin-top: 0.3rem;">&#9789; &#183; &#10023;</div>
+  </div>
+
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.tl-entry').forEach(el => observer.observe(el));
+
+  // floaty moon cursor + sparkle trail
+  const moon = document.createElement('div');
+  moon.className = 'cursor-moon';
+  moon.setAttribute('aria-hidden', 'true');
+  moon.textContent = '\u{1F319}';
+  document.body.appendChild(moon);
+
+  const sparkles = ['\u2728','\u2B50','\u2727','\u2726','\u00B7','\u2606'];
+  let lastSparkle = 0;
+  let lastX = 0, lastY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    moon.style.left = e.clientX + 'px';
+    moon.style.top = e.clientY + 'px';
+
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    const now = Date.now();
+
+    if (dist > 20 && now - lastSparkle > 80) {
+      const s = document.createElement('div');
+      s.className = 'cursor-sparkle';
+      s.setAttribute('aria-hidden', 'true');
+      s.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+      s.style.left = (e.clientX + (Math.random()-0.5)*16) + 'px';
+      s.style.top = (e.clientY + (Math.random()-0.5)*16) + 'px';
+      s.style.fontSize = (8 + Math.random()*10) + 'px';
+      s.style.color = Math.random() > 0.5
+        ? 'rgba(232, 220, 200, 0.7)'
+        : 'rgba(184, 160, 212, 0.6)';
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 1000);
+      lastSparkle = now;
+      lastX = e.clientX;
+      lastY = e.clientY;
+    }
+  });
+
+  document.addEventListener('mouseleave', () => { moon.style.opacity = '0'; });
+  document.addEventListener('mouseenter', () => { moon.style.opacity = '1'; });
+</script>
+
+</body>
+</html>
